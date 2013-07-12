@@ -29,5 +29,11 @@ describe EarthquakeQuery do
       record.update_attribute :magnitude, 5.6
       subject.new(over: 5).all.should == [record]
     end
+
+    it 'filters by distance (within 5 miles)' do
+      record.update_attributes lat: 36.6702, lon: -114.8870
+
+      subject.new(near: '36.6702,-114.8870').all.should == [record]
+    end
   end
 end

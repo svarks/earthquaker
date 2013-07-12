@@ -20,6 +20,11 @@ class EarthquakeQuery
       query = query.where("magnitude > ?", @params[:over])
     end
 
+    if @params[:near]
+      coords = @params[:near].split(',')
+      query = query.near(coords, 5)
+    end
+
     query
   end
 
